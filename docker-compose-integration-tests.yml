@@ -1,0 +1,24 @@
+services:
+  api:
+    image: api
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080" 
+    networks:
+      - network0
+
+  api_test:
+    image: api_test
+    build:
+      context: .
+      dockerfile: ./Dockerfile-Test
+    depends_on:
+      - api
+    networks:
+      - network0
+
+networks:
+  network0:
+    driver: bridge
